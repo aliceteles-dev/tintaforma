@@ -1,0 +1,3 @@
+player_inputs()
+movimento();
+
