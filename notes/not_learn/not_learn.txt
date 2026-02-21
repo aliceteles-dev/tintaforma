@@ -1,0 +1,16 @@
+INTRODUÇÃO ÀS MACROS:
+
+Macro é uma variável no GameMaker cujo valor nunca é alterado. 
+Exceto por manipulação direta do código, é claro.
+Elas são úteis, por exemplo, para fixar o modo debug do jogo de forma que o player médio não consiga utilizá-lo.
+
+Sintaxe:
+
+#macro NOME_EM_CAIXA_ALTA valor_da_macro
+
+
+atenção!: não pode colocar ponto e vírgula depois de declarar uma macro pois isso a faz quebrar.
+
+
+Ao declarar uma macro, é possível fazer qualquer coisa; pode criá-la como um número, como um booleano, como uma
+string ou até mesmo como uma função inteira.
