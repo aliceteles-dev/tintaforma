@@ -25,11 +25,29 @@ left   = false;
 //variáveis de controle
 touching_ground = false;
 
+//animação do jogador
+estado = noone;
 
 #endregion
 
 
 #region Métodos
+
+
+//garantindo que a animação vai começar da sprite 0
+troca_sprite = function(_sprite = spr_parede)
+{
+    if (sprite_index != _sprite)
+    {
+        image_index = 0;
+        sprite_index = _sprite;
+    }
+    
+    
+}
+
+
+
 
 player_inputs = function()
 {
@@ -50,15 +68,6 @@ movimento = function()
     move_and_collide(velh, 0, obj_parede, 12, 0, 1, -1, -1);
     move_and_collide(0, velv, obj_parede, 24);
     
-    //mas eu também quero flipar a sprite
-    if (velh >= 0)
-    {
-        image_xscale = 1;
-    }
-    else
-    {
-    	image_xscale = -1;
-    }
     
     //aplicando a gravidade
     if (touching_ground == false)
@@ -77,6 +86,41 @@ movimento = function()
 check_ground = function()
 {
     touching_ground = place_meeting(x, y + 1, obj_parede);
+}
+
+
+
+//estados do player
+estado_parado = function()
+{
+    //image_blend = c_red;
+    troca_sprite(spr_player_idle);
+    
+    if (right ^^ left)
+        estado = estado_movendo;
+}
+
+estado_movendo = function()
+{
+    //image_blend = c_blue;
+    troca_sprite(spr_player_movendo);
+    
+    if (velh == 0)
+    {
+        estado = estado_parado;
+    }
+
+}
+
+estado_pulando = function()
+{
+    //image_blend = c_green;
+    troca_sprite(spr_player_jump);
+    
+    if (velv == 0)
+    {
+        estado = estado_parado;
+    }
 }
 
 #endregion
@@ -142,3 +186,7 @@ roda_debug = function()
 
 
 #endregion
+
+
+//definindo estado inicial do player
+estado = estado_parado;
