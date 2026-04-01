@@ -14,8 +14,8 @@ keyboard_set_map(ord("W"), vk_space);
 velh        = 0;
 max_velh    = 1.5;
 velv        = 0;
-max_velv    = 4.5;
-g           = 0.3;
+max_velv    = 3.7;
+g           = 0.2;
 
 //inputs do jogador
 jump   = false;
@@ -98,26 +98,45 @@ estado_parado = function()
     
     if (right ^^ left)
         estado = estado_movendo;
+    
+    if (jump)
+    {
+        estado = estado_pulando;
+    }
 }
 
 estado_movendo = function()
 {
     //image_blend = c_blue;
-    troca_sprite(spr_player_movendo);
+    if (sprite_index != spr_player_falling)
+    {
+        troca_sprite(spr_player_movendo);
+    }
     
     if (velh == 0)
     {
         estado = estado_parado;
     }
 
+    if (jump)
+    {
+        estado = estado_pulando;
+    }
 }
 
 estado_pulando = function()
 {
     //image_blend = c_green;
-    troca_sprite(spr_player_jump);
+    if (velv <= 0)
+    { 
+        troca_sprite(spr_player_jump);
+    }
+    else
+    {
+        troca_sprite(spr_player_falling);
+    }
     
-    if (velv == 0)
+    if (touching_ground)
     {
         estado = estado_parado;
     }
