@@ -57,16 +57,11 @@ player_inputs = function()
 }
 
 
-movimento = function()
+aplica_velocidade = function()
 {
 
     //aplicando os inputs ao velh
     velh = (right - left) * max_velh;
-    
-    
-    //cuidando da colisão
-    move_and_collide(velh, 0, obj_parede, 12, 0, 1, -1, -1);
-    move_and_collide(0, velv, obj_parede, 24);
     
     
     //aplicando a gravidade
@@ -83,12 +78,27 @@ movimento = function()
     
 }
 
+movimento = function()
+{
+    move_and_collide(velh, 0, obj_parede, 12, 0, 1, -1, -1);
+    move_and_collide(0, velv, obj_parede, 24);
+}
+
+
 check_ground = function()
 {
     touching_ground = place_meeting(x, y + 1, obj_parede);
 }
 
-
+acabou_animacao = function(_estado = estado_pulando)
+{
+    var _spd = sprite_get_speed(sprite_index) / FPS;
+    
+    if (image_index + _spd >= image_number)
+    {
+        estado = _estado;
+    }
+}
 
 //estados do player
 estado_parado = function()
@@ -103,10 +113,17 @@ estado_parado = function()
     {
         estado = estado_pulando;
     }
+    
+    if (!touching_ground)
+    {
+        estado = estado_pulando;
+    }
 }
 
 estado_movendo = function()
 {
+    aplica_velocidade();
+    
     //image_blend = c_blue;
     if (sprite_index != spr_player_falling)
     {
@@ -126,6 +143,8 @@ estado_movendo = function()
 
 estado_pulando = function()
 {
+    aplica_velocidade();
+    
     //image_blend = c_green;
     if (velv <= 0)
     { 
@@ -141,6 +160,28 @@ estado_pulando = function()
         estado = estado_parado;
     }
 }
+
+//estados relativos ao power up
+estado_powerup_inicio = function()
+{
+    troca_sprite(spr_player_powerup1);
+    acabou_animacao(estado_powerup_meio);
+}
+
+
+estado_powerup_meio = function()
+{
+    troca_sprite(spr_player_powerup2);
+    acabou_animacao(estado_powerup_final);
+}
+
+
+estado_powerup_final = function()
+{
+    troca_sprite(spr_player_powerup3);
+    acabou_animacao(estado_parado);
+}
+
 
 #endregion
 
@@ -208,4 +249,4 @@ roda_debug = function()
 
 
 //definindo estado inicial do player
-estado = estado_parado;
+estado = estado_powerup_inicio;
