@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"Script1",
+  "%Name":"scr_screenshake",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"Script1",
+  "name":"scr_screenshake",
   "parent":{
     "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "path":"folders/Efeitos/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

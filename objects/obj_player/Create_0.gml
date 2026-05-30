@@ -21,12 +21,14 @@ g           = 0.2;
 jump   = false;
 right  = false;
 left   = false;
+poder  = false;
 
 //variáveis de controle
 touching_ground = false;
 
 //animação do jogador
 estado = noone;
+dir = 1;
 
 #endregion
 
@@ -53,13 +55,16 @@ player_inputs = function()
 {
     right   = keyboard_check(vk_right);
     left    = keyboard_check(vk_left);
-    jump    = keyboard_check(vk_space);
+    jump    = keyboard_check_pressed(vk_space);
+    poder   = keyboard_check_pressed(ord("F"));
 }
 
 
 aplica_velocidade = function()
 {
 
+    check_ground();
+    
     //aplicando os inputs ao velh
     velh = (right - left) * max_velh;
     
@@ -77,6 +82,15 @@ aplica_velocidade = function()
     }
     
 }
+
+ajusta_escala = function()
+{
+    if (velh != 0)
+    {
+        dir = sign(velh);
+    }
+}
+
 
 movimento = function()
 {
@@ -103,6 +117,10 @@ acabou_animacao = function(_estado = estado_pulando)
 //estados do player
 estado_parado = function()
 {
+    velv = 0;
+    velh = 0;
+    aplica_velocidade();
+    
     //image_blend = c_red;
     troca_sprite(spr_player_idle);
     
@@ -112,11 +130,20 @@ estado_parado = function()
     if (jump)
     {
         estado = estado_pulando;
+        var _part = instance_create_depth(x, y, depth - 1, obj_particulas_player);
+        _part.sprite_index = spr_player_particula_pulo;
+        efeito_stretchnsquash(.4, 1.5);
     }
     
     if (!touching_ground)
     {
         estado = estado_pulando;
+    }
+    
+    //entrando na tinta (estado_entrando_tinta)
+    if (poder)
+    {
+        estado = estado_entrando_tinta;
     }
 }
 
@@ -138,6 +165,9 @@ estado_movendo = function()
     if (jump)
     {
         estado = estado_pulando;
+        var _part = instance_create_depth(x, y, depth - 1, obj_particulas_player);
+        _part.sprite_index = spr_player_particula_pulo;
+        efeito_stretchnsquash(.4, 1.5);
     }
 }
 
@@ -158,6 +188,9 @@ estado_pulando = function()
     if (touching_ground)
     {
         estado = estado_parado;
+        var _part = instance_create_depth(x, y, depth - 1, obj_particulas_player);
+        _part.sprite_index = spr_player_particula_pouso;
+        efeito_stretchnsquash(1.4, .7);
     }
 }
 
@@ -181,6 +214,55 @@ estado_powerup_final = function()
     troca_sprite(spr_player_powerup3);
     acabou_animacao(estado_parado);
 }
+
+
+//estados relativos à saída e entrada na tinta
+estado_entrando_tinta = function()
+{
+    velh = 0;
+    troca_sprite(spr_player_entra_tinta);
+    
+    if image_index <= 0
+    { 
+        var _part = instance_create_depth(x, y, depth - 1, obj_particulas_player); 
+        _part.sprite_index = spr_particula_entrando_tinta;
+    }
+    
+    acabou_animacao(estado_loop_tinta);
+}
+
+
+estado_loop_tinta = function()
+{
+    aplica_velocidade();
+    troca_sprite(spr_loop_tinta);
+    if(poder) estado = estado_saindo_tinta;
+        
+    var _parar = !place_meeting(x + (sprite_width - 5) * dir + velh, y + 1, obj_parede)
+    if (_parar)
+    {
+        velh = 0;
+    }
+}
+
+estado_saindo_tinta = function()
+{
+    velh = 0;
+    
+    troca_sprite(spr_player_sai_tinta);
+    
+    if image_index <= 0
+    {
+        var _part = instance_create_depth(x, y, depth - 1, obj_particulas_player);
+        _part.sprite_index = spr_particula_saindo_tinta;
+    }
+    
+    acabou_animacao(estado_parado);
+}
+
+
+//efeito stretch and squash
+inicia_efeito_stretchnsquash();
 
 
 #endregion
@@ -249,4 +331,4 @@ roda_debug = function()
 
 
 //definindo estado inicial do player
-estado = estado_powerup_inicio;
+estado = estado_parado;

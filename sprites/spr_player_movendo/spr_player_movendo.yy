@@ -32,8 +32,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"Player",
-    "path":"folders/Sprites/Player.yy",
+    "name":"mov_horiz",
+    "path":"folders/Sprites/Player/mov_horiz.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -30,8 +30,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"Player",
-    "path":"folders/Sprites/Player.yy",
+    "name":"tinta",
+    "path":"folders/Sprites/Player/tinta.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
