@@ -12,10 +12,12 @@ keyboard_set_map(ord("W"), vk_space);
 
 //variáveis de movimento
 velh        = 0;
-max_velh    = 1.5;
+max_velh    = 1;
 velv        = 0;
 max_velv    = 3.7;
 g           = 0.2;
+var _tile   = layer_tilemap_get_id("tl_level");
+colisao     = [obj_parede, _tile];
 
 //inputs do jogador
 jump   = false;
@@ -81,6 +83,7 @@ aplica_velocidade = function()
         y = round(y);
     }
     
+    velv = clamp(velv, -max_velv, max_velv);
 }
 
 ajusta_escala = function()
@@ -94,14 +97,14 @@ ajusta_escala = function()
 
 movimento = function()
 {
-    move_and_collide(velh, 0, obj_parede, 12, 0, 1, -1, -1);
-    move_and_collide(0, velv, obj_parede, 24);
+    move_and_collide(velh, 0, colisao, 12, 0, 1, -1, -1);
+    move_and_collide(0, velv, colisao, 24);
 }
 
 
 check_ground = function()
 {
-    touching_ground = place_meeting(x, y + 1, obj_parede);
+    touching_ground = place_meeting(x, y + 1, colisao);
 }
 
 acabou_animacao = function(_estado = estado_pulando)
@@ -168,6 +171,11 @@ estado_movendo = function()
         var _part = instance_create_depth(x, y, depth - 1, obj_particulas_player);
         _part.sprite_index = spr_player_particula_pulo;
         efeito_stretchnsquash(.4, 1.5);
+    }
+    
+    if (!touching_ground)
+    {
+        estado = estado_pulando;
     }
 }
 
@@ -238,11 +246,13 @@ estado_loop_tinta = function()
     troca_sprite(spr_loop_tinta);
     if(poder) estado = estado_saindo_tinta;
         
-    var _parar = !place_meeting(x + (sprite_width - 5) * dir + velh, y + 1, obj_parede)
+    var _parar = !place_meeting(x + (sprite_width - 5) * dir + velh, y + 1, colisao)
     if (_parar)
     {
         velh = 0;
     }
+    
+    
 }
 
 estado_saindo_tinta = function()
@@ -316,6 +326,9 @@ roda_debug = function()
     
     //testando e podendo mudar valores do meu velv
     dbg_slider(ref_create(id, "max_velv"), 1, 10, "max_velv", 0.1);
+    
+    //testando e mudando o velh
+    dbg_slider(ref_create(id, "max_velh"), 0.1, 10, "velh", 0.1);
     
     //vendo as informações do meu g
     dbg_watch(ref_create(id, "g"), "gravidade");

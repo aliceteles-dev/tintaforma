@@ -1,0 +1,25 @@
+{
+  "$GMParticleSystem":"",
+  "%Name":"ps_tocha",
+  "backdropHeight":18,
+  "backdropImageOpacity":0.5,
+  "backdropImagePath":"C:\\Users\\Alice\\Desktop\\tintaforma\\Materiais e créditos\\Assets\\Cenário\\Decoração\\Tocha.gif",
+  "backdropWidth":6,
+  "backdropXOffset":0.0,
+  "backdropYOffset":0.0,
+  "drawOrder":0,
+  "emitters":[
+    {"$GMPSEmitter":"","%Name":"em_faisca","additiveBlend":false,"directionIncrease":0.0,"directionMax":110.0,"directionMin":50.0,"directionWiggle":5.0,"distribution":0,"editorColour":1090519039,"editorDrawShape":true,"emitCount":2,"emitDelayMax":2.0,"emitDelayMin":0.0,"emitDelayUnits":1,"emitIntervalMax":60.0,"emitIntervalMin":30.0,"emitIntervalUnits":1,"enabled":true,"endColour":4280381183,"GMPresetName":null,"gravityDirection":270.0,"gravityForce":0.0,"headPosition":0.0,"lifetimeMax":40.0,"lifetimeMin":20.0,"linkedEmitter":null,"locked":true,"midColour":4284728831,"mode":0,"name":"em_faisca","orientationIncrease":0.0,"orientationMax":0.0,"orientationMin":0.0,"orientationRelative":false,"orientationWiggle":0.0,"regionH":7.7603817,"regionW":5.8994446,"regionX":0.0,"regionY":-2.0,"resourceType":"GMPSEmitter","resourceVersion":"2.0","scaleX":1.0,"scaleY":1.0,"shape":1,"sizeIncrease":0.001,"sizeMax":1.0,"sizeMin":0.5,"sizeWiggle":0.1,"spawnOnDeathCount":1,"spawnOnDeathGMPreset":null,"spawnOnDeathId":null,"spawnOnUpdateCount":1,"spawnOnUpdateGMPreset":null,"spawnOnUpdateId":null,"speedIncrease":0.005,"speedMax":0.5,"speedMin":0.0,"speedWiggle":0.0,"spriteAnimate":false,"spriteId":{"name":"spr_faisca4","path":"sprites/spr_faisca4/spr_faisca4.yy",},"spriteRandom":false,"spriteStretch":true,"startColour":4293263359,"texture":-1,},
+  ],
+  "name":"ps_tocha",
+  "parent":{
+    "name":"Particle Systems",
+    "path":"folders/Particle Systems.yy",
+  },
+  "resourceType":"GMParticleSystem",
+  "resourceVersion":"2.0",
+  "showBackdrop":true,
+  "showBackdropImage":true,
+  "xorigin":0,
+  "yorigin":2,
+}

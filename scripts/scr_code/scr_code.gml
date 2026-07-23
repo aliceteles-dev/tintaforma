@@ -13,3 +13,9 @@
 
 
 global.debug = false;
+
+
+//supostamente isso ativa o vsync
+//if (display_aa >= 8) {
+    //display_reset(0, true);
+//}
