@@ -6,10 +6,13 @@
   "name":"obj_dado",
   "overriddenProperties":[],
   "parent":{
-    "name":"Blocos",
-    "path":"folders/Objects/Blocos.yy",
+    "name":"Level",
+    "path":"folders/Objects/Level.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_parede",
+    "path":"objects/obj_parede/obj_parede.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

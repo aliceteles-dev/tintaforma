@@ -6,10 +6,13 @@
   "name":"obj_plat_grande",
   "overriddenProperties":[],
   "parent":{
-    "name":"Blocos",
-    "path":"folders/Objects/Blocos.yy",
+    "name":"Level",
+    "path":"folders/Objects/Level.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_parede_one_way",
+    "path":"objects/obj_parede_one_way/obj_parede_one_way.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

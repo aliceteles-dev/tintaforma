@@ -17,7 +17,7 @@ velv        = 0;
 max_velv    = 3.7;
 g           = 0.2;
 var _tile   = layer_tilemap_get_id("tl_level");
-colisao     = [obj_parede, _tile];
+colisao     = [obj_parede, _tile, obj_parede_one_way];
 
 //inputs do jogador
 jump   = false;

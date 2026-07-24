@@ -1,12 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_tocha",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_parede_one_way",
+  "eventList":[],
   "managed":true,
-  "name":"obj_tocha",
+  "name":"obj_parede_one_way",
   "overriddenProperties":[],
   "parent":{
     "name":"Level",
@@ -31,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_tocha",
-    "path":"sprites/spr_tocha/spr_tocha.yy",
+    "name":"spr_one_way",
+    "path":"sprites/spr_one_way/spr_one_way.yy",
   },
   "spriteMaskId":null,
   "visible":true,
