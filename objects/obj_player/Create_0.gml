@@ -17,7 +17,7 @@ velv        = 0;
 max_velv    = 3.7;
 g           = 0.2;
 var _tile   = layer_tilemap_get_id("tl_level");
-colisao     = [obj_parede, _tile, obj_parede_one_way];
+colisao     = [obj_parede, _tile];
 
 //inputs do jogador
 jump   = false;
@@ -27,6 +27,7 @@ poder  = false;
 
 //variáveis de controle
 touching_ground = false;
+deletar = array_length(colisao);
 
 //animação do jogador
 estado = noone;
@@ -187,10 +188,24 @@ estado_pulando = function()
     if (velv <= 0)
     { 
         troca_sprite(spr_player_jump);
+        //tirar o parede one way do meu array se ele estiver lá
+        //colisao[2] = noone;
+        if (array_contains(colisao, obj_parede_one_way))
+        {
+            var _ind = array_get_index(colisao, obj_parede_one_way);
+            array_delete(colisao, _ind, 1);
+        }
     }
     else
     {
         troca_sprite(spr_player_falling);
+        if (!place_meeting(x, y, obj_parede_one_way))
+        {
+            if (!array_contains(colisao, obj_parede_one_way))
+            {
+                array_push(colisao, obj_parede_one_way);
+            }
+        }
     }
     
     if (touching_ground)
@@ -199,6 +214,17 @@ estado_pulando = function()
         var _part = instance_create_depth(x, y, depth - 1, obj_particulas_player);
         _part.sprite_index = spr_player_particula_pouso;
         efeito_stretchnsquash(1.4, .7);
+        if (!place_meeting(x, y, obj_parede_one_way))
+        {
+            //array_push
+            //colisao[2] = obj_parede_one_way;
+            //usar array push pra colocar one way na lista de colisoes SE (aqui entra outra função array)
+            //SE ele ainda não estiver lá 
+            if (!array_contains(colisao, obj_parede_one_way))
+            {
+                array_push(colisao, obj_parede_one_way);
+            }
+        }
     }
 }
 
