@@ -38,6 +38,11 @@ dir = 1;
 
 #region Métodos
 
+//colisão com o powerup
+peguei_powerup = function()
+{
+    estado = estado_powerup_inicio;
+}
 
 //garantindo que a animação vai começar da sprite 0
 troca_sprite = function(_sprite = spr_parede)
@@ -50,8 +55,6 @@ troca_sprite = function(_sprite = spr_parede)
     
     
 }
-
-
 
 
 player_inputs = function()
@@ -231,6 +234,8 @@ estado_pulando = function()
 //estados relativos ao power up
 estado_powerup_inicio = function()
 {
+    velh = 0;
+    velv = 0;
     troca_sprite(spr_player_powerup1);
     acabou_animacao(estado_powerup_meio);
 }
